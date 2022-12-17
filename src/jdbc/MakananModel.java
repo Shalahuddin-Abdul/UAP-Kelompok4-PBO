@@ -60,8 +60,12 @@ public class MakananModel {
             status = true;
         }
     }
-    public void updHargaMakanan(Makanan mkn){
-        String update = "UPDATE mkn SET mkn.harga='" + mkn.getHarga()+ "' WHERE mkn.nama_produk='" + mkn.getNama_produk() + "';";
+    public void updMakananSQL(Makanan mkn){
+        String update = "UPDATE `mkn` SET `harga`=" + mkn.getHarga() + 
+                ", `jumlah`=" + mkn.getJumlah() + 
+                ", `diskon`=" + mkn.getDiskon() + 
+                ", `daya_tahan`=" + mkn.getDaya_tahan() +
+                " WHERE `nama_produk`='" + mkn.getNama_produk() + "';";
         try {
             if(CONN.createStatement().executeUpdate(update)>0){
                 System.out.println("Berhasil Update Data");
