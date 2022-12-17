@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.ListBarangPageController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="600.0" spacing="24.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List Barang">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableBarang" prefHeight="294.0" prefWidth="552.0">
+              <columns>
+                <TableColumn fx:id="colBrg" prefWidth="160.0" text="Barang" />
+                <TableColumn fx:id="colHrg" prefWidth="119.20001220703125" text="Harga" />
+                  <TableColumn fx:id="colJml" prefWidth="56.0" text="Jumlah" />
+                  <TableColumn fx:id="colDsc" prefWidth="99.20001220703125" text="Diskon" />
+                  <TableColumn fx:id="colBc" prefWidth="55.20001220703125" text="Barcode" />
+                  <TableColumn fx:id="colExp" prefWidth="59.20001220703125" text="Expired" />
+              </columns>
+            </TableView>
+         </children>
+         <padding>
+            <Insets left="24.0" right="24.0" top="32.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
