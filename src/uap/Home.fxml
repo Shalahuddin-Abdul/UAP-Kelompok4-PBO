@@ -25,6 +25,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button fx:id="btnDaftarBrg" mnemonicParsing="false" onAction="#goToDaftarBrg" text="Daftar Barang">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
             <Button fx:id="btnUbahMenu" mnemonicParsing="false" onAction="#gotoChangeMenu" text="Tambah Menu">
                <font>
                   <Font size="18.0" />
