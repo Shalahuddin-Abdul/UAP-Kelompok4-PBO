@@ -1,27 +1,50 @@
 package uap;
 
+import db.DBHelper;
+import static db.DBHelper.getConnection;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import jdbc.MakananModel;
 import uap.Classes.Makanan;
 
-public class AddMakananPageController {
+public class AddMakananPageController implements Initializable {
 
+    //Text Button
     @FXML
     private Button addBtn;
 
     @FXML
     private Button cancelBtn;
+    
+    @FXML
+    private Button rmvBtn;
 
+    @FXML
+    private Button btnEdit;
+    
+    //Text Field
     @FXML
     private TextField discField;
 
@@ -40,9 +63,73 @@ public class AddMakananPageController {
     @FXML
     private Text lblStatus;
     
+    //Tabel Column
     @FXML
-    private Button rmvBtn;
+    private TableColumn<Makanan, Integer> colDayaTahan;
 
+    @FXML
+    private TableColumn<Makanan, Double> colDiskon;
+
+    @FXML
+    private TableColumn<Makanan, Double> colHarga;
+
+    @FXML
+    private TableColumn<Makanan, Integer> colId;
+
+    @FXML
+    private TableColumn<Makanan, Integer> colJumlah;
+
+    @FXML
+    private TableColumn<Makanan, String> colMakanan;
+        
+    //table stuff
+    ObservableList<Makanan> menu;
+    
+    @FXML
+    private TableView<Makanan> mknTable;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        try {
+            showBarang();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showBarang() throws SQLException{
+        ObservableList<Makanan> list = getMakananList();
+        colMakanan.setCellValueFactory(new PropertyValueFactory<>("nama_produk"));
+        colHarga.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        menu = DBHelper.getMakananMenu();
+        
+        mknTable.setItems(list);
+        
+    }
+
+    public ObservableList<Makanan> getMakananList() throws SQLException{
+        ObservableList<Makanan> makananList = FXCollections.observableArrayList();
+        Connection conn = getConnection();
+        String query = "SELECT * from mkn;";
+        Statement st;
+        ResultSet rs;
+        
+        try{
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            Makanan mkn;
+            while(rs.next()){
+                mkn = new Makanan(rs.getString("nama_produk"), rs.getDouble("harga"), rs.getInt("jumlah"), rs.getDouble("diskon"), rs.getInt("daya_tahan"));
+                makananList.add(mkn);
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return makananList;
+    }
+    
+    
     @FXML
     void addMakanan(ActionEvent event) {
         MakananModel mkn = new MakananModel();
@@ -82,7 +169,7 @@ public class AddMakananPageController {
         int jmlF = Integer.parseInt(jmlField.getText());
         double discF = Double.parseDouble(discField.getText());
         int dtF = Integer.parseInt(dtField.getText());
-        Makanan mkn1 = new Makanan(namaField.getText(), hrgF, jmlF, discF);
+    Makanan mkn1 = new Makanan(namaField.getText(), hrgF, jmlF, discF, dtF);
         mkn.dltMakananSQL(mkn1);
         if(mkn.status == true){
             lblStatus.setText("Berhasil Menghapus Data");
@@ -99,4 +186,23 @@ public class AddMakananPageController {
         discField.clear();
         dtField.clear();
     }
+
+    
+    @FXML
+    void editMakanan(ActionEvent even) throws IOException{
+        MakananModel mkn = new MakananModel();
+        double hrgF = Double.parseDouble(hargaField.getText());
+        int jmlF = Integer.parseInt(jmlField.getText());
+        double discF = Double.parseDouble(discField.getText());
+        int dtF = Integer.parseInt(dtField.getText());
+        Makanan mkn1 = new Makanan(namaField.getText(), hrgF, jmlF, discF, dtF);
+        mkn.updMakananSQL(mkn1);
+        if(mkn.status == true){
+            lblStatus.setText("Berhasil Mengganti Data");
+        }else{
+            lblStatus.setText("Gagal Mengganti Data");
+        }
+        clearFieldValue();
+    }
+    
 }
