@@ -12,88 +12,92 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import uap.Classes.Kategori;
+import javax.swing.JOptionPane;
+import uap.Classes.Makanan;
 
 /**
  *
  * @author Isal
  */
-public class KategoriModel {
+public class MakananModel {
     private final Connection CONN;
     public boolean status;
 
-    public KategoriModel() {
+    public MakananModel() {
         this.CONN = DBHelper.getConnection();
     }
-    //addKategori
-    public void addKategoriSQL(Kategori ktg){
-        String insert = "INSERT INTO ktg VALUES ('" + ktg.getNama_kategori() + "');";
+    //addMakanan
+    public void addMakananSQL(Makanan mkn){
+        String insert = "INSERT INTO mkn VALUES ('" + mkn.getNama_produk() + "', " + mkn.getHarga() + ", " + mkn.getJumlah() + ", " + mkn.getDiskon() + ", null, " + mkn.getDaya_tahan() + ");";
 //        System.out.println(insert);
         try {
             if(CONN.createStatement().executeUpdate(insert)>0){
-                System.out.println("Berhasil Memasukkan Data");
+                JOptionPane.showMessageDialog(null, "Berhasil Memasukkan Data");
                 status = true;
             }else{
-                System.out.println("Gagal Memasukkan Data");
+                JOptionPane.showMessageDialog(null, "Gagal Memasukkan Data");
                 status = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Gagal Memasukkan Data");
+            JOptionPane.showMessageDialog(null, "Gagal Memasukkan Data");
             status = false;
         }
     }
     
-    public void dltKategoriSQL(Kategori ktg){
-        String delete = "DELETE FROM ktg WHERE ktg.nama_produk='" + ktg.getNama_kategori() + "';";
+    public void dltMakananSQL(Makanan mkn){
+        String delete = "DELETE FROM mkn WHERE mkn.nama_produk='" + mkn.getNama_produk() + "';";
         try {
             if(CONN.createStatement().executeUpdate(delete)>0){
-                System.out.println("Berhasil Menghapus Data");
+                JOptionPane.showMessageDialog(null, "Berhasil Menghapus Data");
                 status = true;
             }else{
-                System.out.println("Gagal Menghapus Data");
+                JOptionPane.showMessageDialog(null, "Gagal Menghapus Data");
                 status = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Gagal Menghapus Data");
-            status = false;
+            JOptionPane.showMessageDialog(null, "Gagal Menghapus Data");
+            status = true;
         }
     }
-    public void updNamaKtgSQL(Kategori ktg){
-        String update = "UPDATE ktg SET ktg.nama_kategori='" + ktg.getNama_kategori()+ "' WHERE ktg.id='" + ktg.getId() + "';";
+    public void updMakananSQL(Makanan mkn){
+        String update = "UPDATE `mkn` SET `harga`=" + mkn.getHarga() + 
+                ", `jumlah`=" + mkn.getJumlah() + 
+                ", `diskon`=" + mkn.getDiskon() + 
+                ", `daya_tahan`=" + mkn.getDaya_tahan() +
+                " WHERE `nama_produk`='" + mkn.getNama_produk() + "';";
         try {
             if(CONN.createStatement().executeUpdate(update)>0){
-                System.out.println("Berhasil Update Data");
+                JOptionPane.showMessageDialog(null, "Berhasil Update Data");
+                status = true;
             }else{
-                System.out.println("Gagal Update Data");
+                JOptionPane.showMessageDialog(null, "Gagal Update Data");
+                status = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Gagal Update Data");
+            JOptionPane.showMessageDialog(null, "Gagal Update Data");
+            status = false;
         }
     }
     
     
-    public ArrayList<Kategori> getKategori(){
-        String query = "SELECT * FROM ktg";
-        ArrayList<Kategori> ktg = new ArrayList();
+    public ArrayList<Makanan> getMakanan(){
+        String query = "SELECT * FROM mkn";
+        ArrayList<Makanan> mkn = new ArrayList();
         
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
             while(rs.next()){
-                Kategori temp = new Kategori(rs.getString("nama_kategori"));
-                ktg.add(temp);
+                Makanan temp = new Makanan(rs.getString("nama_produk"), rs.getDouble("harga"), rs.getInt("jumlah"), rs.getDouble("diskon"), rs.getInt("daya_tahan"));
+                mkn.add(temp);
             }
             System.out.println("Berhasil Mengambil Data");
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Berhasil Mengambil Data");
         }
-        return ktg;
+        return mkn;
     }
-    
-    
-    
 }
-
