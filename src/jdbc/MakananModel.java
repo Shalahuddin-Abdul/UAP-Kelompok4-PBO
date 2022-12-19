@@ -12,22 +12,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import uap.Classes.Makanan;
+import uap.Classes.Kategori;
 
 /**
  *
  * @author Isal
  */
-public class MakananModel {
+public class KategoriModel {
     private final Connection CONN;
     public boolean status;
 
-    public MakananModel() {
+    public KategoriModel() {
         this.CONN = DBHelper.getConnection();
     }
-    //addMakanan
-    public void addMakananSQL(Makanan mkn){
-        String insert = "INSERT INTO mkn VALUES ('" + mkn.getNama_produk() + "', " + mkn.getHarga() + ", " + mkn.getJumlah() + ", " + mkn.getDiskon() + ", null, " + mkn.getDaya_tahan() + ");";
+    //addKategori
+    public void addKategoriSQL(Kategori ktg){
+        String insert = "INSERT INTO ktg VALUES ('" + ktg.getNama_kategori() + "');";
 //        System.out.println(insert);
         try {
             if(CONN.createStatement().executeUpdate(insert)>0){
@@ -44,8 +44,8 @@ public class MakananModel {
         }
     }
     
-    public void dltMakananSQL(Makanan mkn){
-        String delete = "DELETE FROM mkn WHERE mkn.nama_produk='" + mkn.getNama_produk() + "';";
+    public void dltKategoriSQL(Kategori ktg){
+        String delete = "DELETE FROM ktg WHERE ktg.nama_produk='" + ktg.getNama_kategori() + "';";
         try {
             if(CONN.createStatement().executeUpdate(delete)>0){
                 System.out.println("Berhasil Menghapus Data");
@@ -57,46 +57,43 @@ public class MakananModel {
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Gagal Menghapus Data");
-            status = true;
+            status = false;
         }
     }
-    public void updMakananSQL(Makanan mkn){
-        String update = "UPDATE `mkn` SET `harga`=" + mkn.getHarga() + 
-                ", `jumlah`=" + mkn.getJumlah() + 
-                ", `diskon`=" + mkn.getDiskon() + 
-                ", `daya_tahan`=" + mkn.getDaya_tahan() +
-                " WHERE `nama_produk`='" + mkn.getNama_produk() + "';";
+    public void updNamaKtgSQL(Kategori ktg){
+        String update = "UPDATE ktg SET ktg.nama_kategori='" + ktg.getNama_kategori()+ "' WHERE ktg.id='" + ktg.getId() + "';";
         try {
             if(CONN.createStatement().executeUpdate(update)>0){
                 System.out.println("Berhasil Update Data");
-                status = true;
             }else{
                 System.out.println("Gagal Update Data");
-                status = false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Gagal Update Data");
-            status = false;
         }
     }
     
     
-    public ArrayList<Makanan> getMakanan(){
-        String query = "SELECT * FROM mkn";
-        ArrayList<Makanan> mkn = new ArrayList();
+    public ArrayList<Kategori> getKategori(){
+        String query = "SELECT * FROM ktg";
+        ArrayList<Kategori> ktg = new ArrayList();
         
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
             while(rs.next()){
-                Makanan temp = new Makanan(rs.getString("nama_produk"), rs.getDouble("harga"), rs.getInt("jumlah"), rs.getDouble("diskon"), rs.getInt("daya_tahan"));
-                mkn.add(temp);
+                Kategori temp = new Kategori(rs.getString("nama_kategori"));
+                ktg.add(temp);
             }
             System.out.println("Berhasil Mengambil Data");
         } catch (SQLException ex) {
             Logger.getLogger(MakananModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Berhasil Mengambil Data");
         }
-        return mkn;
+        return ktg;
     }
+    
+    
+    
 }
+
