@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="uap.StrukController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.StrukController">
    <children>
-      <Text layoutX="277.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Struk">
+      <Text layoutX="277.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Struk" AnchorPane.bottomAnchor="334.482421875" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="277.7890625" AnchorPane.topAnchor="41.517578125">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <TableView fx:id="strukTable" layoutX="42.0" layoutY="100.0" prefHeight="233.0" prefWidth="522.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="100.0">
+        <columns>
+          <TableColumn fx:id="colProduk" prefWidth="205.60003662109375" text="Produk" />
+          <TableColumn fx:id="colJumlah" prefWidth="112.79998779296875" text="Jumlah" />
+            <TableColumn fx:id="colHarga" prefWidth="204.0" text="Total Harga" />
+        </columns>
+      </TableView>
+      <HBox alignment="CENTER_LEFT" layoutX="251.0" layoutY="353.0" prefHeight="24.0" prefWidth="98.0" spacing="16.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="lblHarga" strokeType="OUTSIDE" strokeWidth="0.0" text="Harga">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

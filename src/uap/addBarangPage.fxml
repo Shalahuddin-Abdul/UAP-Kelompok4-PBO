@@ -2,7 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,24 +13,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.AddBarangPageController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.AddBarangPageController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="420.0" prefWidth="620.0">
-         <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <SplitPane dividerPositions="0.5752005347593582" orientation="VERTICAL" prefHeight="600.0" prefWidth="806.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Text layoutX="52.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Barang">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="400.0" prefWidth="418.0" spacing="32.0">
+                  <VBox alignment="CENTER" prefHeight="351.0" prefWidth="806.0" spacing="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox alignment="CENTER" spacing="64.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Barang">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="151.0" prefWidth="419.0" spacing="48.0">
                            <children>
                               <VBox alignment="CENTER_LEFT" spacing="24.0">
                                  <children>
@@ -35,8 +34,6 @@
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Harga" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jumlah" />
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Diskon" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barcode" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Expired" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" spacing="16.0">
@@ -45,8 +42,20 @@
                                     <TextField fx:id="hargaField" />
                                     <TextField fx:id="jmlField" />
                                     <TextField fx:id="discField" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="24.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barcode" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Expired" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kategori" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="16.0">
+                                 <children>
                                     <TextField fx:id="bcField" />
                                     <TextField fx:id="expField" />
+                                    <ComboBox fx:id="dropdownKategori" prefWidth="150.0" />
                                  </children>
                               </VBox>
                            </children>
@@ -61,12 +70,34 @@
                         <Text fx:id="lblStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="Masukkan Barang" />
                      </children>
                      <padding>
-                        <Insets top="64.0" />
+                        <Insets bottom="8.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
                   </VBox>
                </children>
             </AnchorPane>
-         </items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <HBox prefHeight="251.0" prefWidth="806.0">
+                     <children>
+                        <TableView fx:id="tableBarang" prefHeight="235.0" prefWidth="775.0">
+                          <columns>
+                            <TableColumn fx:id="colBarang" prefWidth="176.7999496459961" text="Barang" />
+                            <TableColumn fx:id="colHarga" prefWidth="141.60000610351562" text="Harga" />
+                              <TableColumn fx:id="colJumlah" prefWidth="72.0" text="Jumlah" />
+                              <TableColumn fx:id="colDiskon" prefWidth="128.0" text="Diskon" />
+                              <TableColumn fx:id="colBarcode" prefWidth="84.79998779296875" text="Barcode" />
+                              <TableColumn fx:id="colExpired" prefWidth="78.4000244140625" text="Expired" />
+                              <TableColumn fx:id="colKategori" prefWidth="100.0" text="Kategori" />
+                          </columns>
+                        </TableView>
+                     </children>
+                     <padding>
+                        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </items>
       </SplitPane>
    </children>
 </AnchorPane>

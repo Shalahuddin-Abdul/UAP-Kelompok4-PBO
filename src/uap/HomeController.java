@@ -28,6 +28,9 @@ public class HomeController {
     private Button btnUbahMenu;
     
     @FXML
+    private Button btnKategori;
+    
+    @FXML
     void goToDaftarBrg(ActionEvent event) throws IOException {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListBarangPage.fxml"));
 //        Parent root = loader.load();
@@ -88,5 +91,13 @@ public class HomeController {
         stage.setScene(new Scene(root));
     }
     
+    @FXML
+    void gotoKategori(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddKategoriPage.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) btnKategori.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
+    }
     
 }

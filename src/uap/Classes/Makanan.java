@@ -17,10 +17,15 @@ public class Makanan extends Produk{
         super(nama_produk, harga, jumlah, diskon);
         this.daya_tahan = daya_tahan;
     }
+    
     public Makanan(String nama_produk, double harga, int jumlah, double diskon) {
-        super(nama_produk, harga = 0, jumlah = 0, diskon = 0);
+        super(nama_produk, harga, jumlah, diskon);
     }
-
+    
+    public Makanan(String nama_produk) {
+        super(nama_produk);
+    }
+    
     
     public int getId() {
         return id;

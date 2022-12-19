@@ -98,7 +98,6 @@ public class ListBarangPageController implements Initializable{
         colDsc.setCellValueFactory(new PropertyValueFactory<>("diskon"));
         colBc.setCellValueFactory(new PropertyValueFactory<>("barcode"));
         colExp.setCellValueFactory(new PropertyValueFactory<>("expired"));
-        barang = DBHelper.getMakananMenu();
         
         tableBarang.setItems(list);
         

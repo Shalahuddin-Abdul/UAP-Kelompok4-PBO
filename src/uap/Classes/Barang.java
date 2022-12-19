@@ -14,17 +14,28 @@ import java.util.ArrayList;
 public class Barang extends Produk{
     private String barcode;
     private String expired;
-    private ArrayList<Kategori> kategori;
+//    private ArrayList<Kategori> kategori;
+    private String kategori;
 
+    public Barang(String nama_produk, double harga, int jumlah, double diskon, String barcode, String expired, String kategori) {
+        super(nama_produk, harga, jumlah, diskon);
+        this.barcode = barcode;
+        this.expired = expired;
+//        this.kategori = new ArrayList<>();
+        this.kategori = kategori;
+    }
     public Barang(String nama_produk, double harga, int jumlah, double diskon, String barcode, String expired) {
         super(nama_produk, harga, jumlah, diskon);
         this.barcode = barcode;
         this.expired = expired;
-        this.kategori = new ArrayList<>();
+//        this.kategori = new ArrayList<>();
     }
-    
     public Barang(String nama_produk, double harga, int jumlah, double diskon){
-        super(nama_produk, harga = 0, jumlah = 0, diskon = 0);
+        super(nama_produk, harga, jumlah, diskon = 0);
+        
+    }
+    public Barang(String nama_produk){
+        super(nama_produk);
         
     }
 
@@ -44,11 +55,19 @@ public class Barang extends Produk{
         this.expired = expired;
     }
 
-    public ArrayList<Kategori> getKategori() {
+//    public ArrayList<Kategori> getKategori() {
+//        return kategori;
+//    }
+//
+//    public void setKategori(ArrayList<Kategori> kategori) {
+//        this.kategori = new ArrayList<>(kategori);
+//    }
+
+    public String getKategori() {
         return kategori;
     }
 
-    public void setKategori(ArrayList<Kategori> kategori) {
+    public void setKategori(String kategori) {
         this.kategori = kategori;
     }
     

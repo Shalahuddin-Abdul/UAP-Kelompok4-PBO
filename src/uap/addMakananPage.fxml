@@ -2,7 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,61 +15,122 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.AddMakananPageController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uap.AddMakananPageController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="410.0" prefWidth="610.0">
-         <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <SplitPane dividerPositions="0.45655080213903737" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Text layoutX="42.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Makanan">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="400.0" prefWidth="418.0" spacing="32.0">
+                  <VBox alignment="CENTER" prefHeight="275.0" prefWidth="799.0" spacing="16.0">
                      <children>
-                        <HBox alignment="CENTER" spacing="64.0">
-                           <children>
-                              <VBox alignment="CENTER_LEFT" spacing="24.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Harga" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jumlah" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Diskon" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daya Tahan" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" spacing="16.0">
-                                 <children>
-                                    <TextField fx:id="namaField" prefHeight="26.0" prefWidth="150.0" />
-                                    <TextField fx:id="hargaField" />
-                                    <TextField fx:id="jmlField" />
-                                    <TextField fx:id="discField" />
-                                    <TextField fx:id="dtField" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" spacing="32.0">
-                           <children>
-                              <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#gotoHome" text="Cancel" />
-                              <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addMakanan" text="Add" />
-                              <Button fx:id="rmvBtn" mnemonicParsing="false" onAction="#rmvMakanan" text="Remove" />
-                           </children>
-                        </HBox>
-                        <Text fx:id="lblStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="Masukkan Makanan" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Makanan">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                        <TableView fx:id="mknTable">
+                           <columns>
+                              <TableColumn fx:id="colMakanan" prefWidth="194.3999908566475" text="Makanan" />
+                              <TableColumn fx:id="colHarga" prefWidth="172.00001525878906" text="Harga" />
+                              <TableColumn fx:id="colJumlah" prefWidth="127.20001220703125" text="Jumlah" />
+                              <TableColumn fx:id="colDiskon" prefWidth="132.79998779296875" text="Diskon" />
+                              <TableColumn fx:id="colId" minWidth="0.0" prefWidth="47.2000732421875" text="ID" />
+                              <TableColumn fx:id="colDayaTahan" prefWidth="96.7999267578125" text="Daya Tahan" />
+                           </columns>
+                        </TableView>
                      </children>
                      <padding>
-                        <Insets top="64.0" />
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
                   </VBox>
                </children>
             </AnchorPane>
-         </items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.546890672016048" prefHeight="318.0" prefWidth="799.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TabPane>
+                                 <tabs>
+                                    <Tab text="Tambah">
+                                       <content>
+                                          <AnchorPane>
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="285.0" prefWidth="434.0" spacing="16.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" spacing="64.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" spacing="18.0">
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nama" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Harga" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jumlah" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Diskon" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Daya Tahan" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox alignment="CENTER" spacing="8.0">
+                                                               <children>
+                                                                  <TextField fx:id="namaField" prefHeight="26.0" prefWidth="150.0" />
+                                                                  <TextField fx:id="hargaField" />
+                                                                  <TextField fx:id="jmlField" />
+                                                                  <TextField fx:id="discField" />
+                                                                  <TextField fx:id="dtField" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" spacing="32.0">
+                                                         <children>
+                                                            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#gotoHome" text="Cancel" />
+                                                            <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addMakanan" text="Add" />
+                                                            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editMakanan" text="Edit" />
+                                                         </children>
+                                                      </HBox>
+                                                      <Text fx:id="lblStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="Masukkan Makanan" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="8.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab text="Hapus">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="CENTER" layoutX="85.0" layoutY="101.0" spacing="32.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" spacing="32.0">
+                                                         <children>
+                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Makanan">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Text>
+                                                            <ComboBox fx:id="dropdownMkn" prefWidth="150.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <Button fx:id="rmvBtn" mnemonicParsing="false" onAction="#rmvMakanan" text="Remove" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
       </SplitPane>
    </children>
 </AnchorPane>

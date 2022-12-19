@@ -11,6 +11,19 @@ package uap.Classes;
  */
 public class Kategori {
     private String nama_kategori;
+    private int id;
+
+    
+    //untuk change nama makanan
+    public Kategori(String nama_kategori, int id) {
+        this.nama_kategori = nama_kategori;
+        this.id = id;
+    }
+
+    //untuk input makanan baru
+    public Kategori(String nama_kategori) {
+        this.nama_kategori = nama_kategori;
+    }
 
     public String getNama_kategori() {
         return nama_kategori;
@@ -18,6 +31,14 @@ public class Kategori {
 
     public void setNama_kategori(String nama_kategori) {
         this.nama_kategori = nama_kategori;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public void getProduk(){

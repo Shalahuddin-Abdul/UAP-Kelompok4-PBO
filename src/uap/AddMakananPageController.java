@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -81,6 +82,9 @@ public class AddMakananPageController implements Initializable {
 
     @FXML
     private TableColumn<Makanan, String> colMakanan;
+    
+    @FXML
+    private ComboBox<String> dropdownMkn;
         
     //table stuff
     ObservableList<Makanan> menu;
@@ -92,6 +96,7 @@ public class AddMakananPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         try {
             showBarang();
+            showMakananDelete();
         } catch (SQLException ex) {
             Logger.getLogger(MenuPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,6 +106,10 @@ public class AddMakananPageController implements Initializable {
         ObservableList<Makanan> list = getMakananList();
         colMakanan.setCellValueFactory(new PropertyValueFactory<>("nama_produk"));
         colHarga.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        colJumlah.setCellValueFactory(new PropertyValueFactory<>("jumlah"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDiskon.setCellValueFactory(new PropertyValueFactory<>("diskon"));
+        colDayaTahan.setCellValueFactory(new PropertyValueFactory<>("daya_tahan"));
         menu = DBHelper.getMakananMenu();
         
         mknTable.setItems(list);
@@ -133,12 +142,7 @@ public class AddMakananPageController implements Initializable {
     @FXML
     void addMakanan(ActionEvent event) {
         MakananModel mkn = new MakananModel();
-//        ArrayList<Makanan> listMakanan = mkn.getMakanan();
-//        for (Makanan lm : listMakanan) {
-//            System.out.println("Nama: " + lm.getNama_produk());
-//            System.out.println("Harga: " + lm.getHarga());
-//            System.out.println(" ");
-//        }
+
         double hrgF = Double.parseDouble(hargaField.getText());
         int jmlF = Integer.parseInt(jmlField.getText());
         double discF = Double.parseDouble(discField.getText());
@@ -151,6 +155,7 @@ public class AddMakananPageController implements Initializable {
             lblStatus.setText("Gagal Memasukkan Data");
         }
         clearFieldValue();
+
     }
 
     @FXML
@@ -165,11 +170,8 @@ public class AddMakananPageController implements Initializable {
     @FXML
     void rmvMakanan(ActionEvent event) throws IOException{
         MakananModel mkn = new MakananModel();
-        double hrgF = Double.parseDouble(hargaField.getText());
-        int jmlF = Integer.parseInt(jmlField.getText());
-        double discF = Double.parseDouble(discField.getText());
-        int dtF = Integer.parseInt(dtField.getText());
-    Makanan mkn1 = new Makanan(namaField.getText(), hrgF, jmlF, discF, dtF);
+        
+        Makanan mkn1 = new Makanan(dropdownMkn.getValue());
         mkn.dltMakananSQL(mkn1);
         if(mkn.status == true){
             lblStatus.setText("Berhasil Menghapus Data");
@@ -186,6 +188,8 @@ public class AddMakananPageController implements Initializable {
         discField.clear();
         dtField.clear();
     }
+    
+    
 
     
     @FXML
@@ -203,6 +207,27 @@ public class AddMakananPageController implements Initializable {
             lblStatus.setText("Gagal Mengganti Data");
         }
         clearFieldValue();
+    }
+
+    private void showMakananDelete() {
+        ObservableList<String> mknList = FXCollections.observableArrayList();
+        Connection conn = getConnection();
+        String query = "SELECT * from mkn;";
+        Statement st;
+        ResultSet rs;
+        
+        try{
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                mknList.add(rs.getString("nama_produk"));
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        dropdownMkn.setItems(mknList);
     }
     
 }

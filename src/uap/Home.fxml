@@ -40,6 +40,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button fx:id="btnKategori" mnemonicParsing="false" onAction="#gotoKategori" prefHeight="40.0" prefWidth="165.0" text="Kategori">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </children>

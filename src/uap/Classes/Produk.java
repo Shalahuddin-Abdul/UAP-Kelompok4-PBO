@@ -21,6 +21,18 @@ public class Produk {
         this.jumlah = jumlah;
         this.diskon = diskon;
     }
+
+    public Produk(String nama_produk, double harga, int jumlah) {
+        this.nama_produk = nama_produk;
+        this.harga = harga;
+        this.jumlah = jumlah;
+    }
+    
+    
+    
+    public Produk(String nama_produk){
+        this.nama_produk = nama_produk;
+    }
     
 
     public String getNama_produk() {

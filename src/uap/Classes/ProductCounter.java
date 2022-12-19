@@ -10,12 +10,12 @@ package uap.Classes;
  * @author Isal
  */
 interface ProductCounter {
-    double TAX = 0;
+    double TAX = 0.10;
 
     public double getTAX();
 
     public void setTAX(double TAX);
     
-    public void hitungJumlahProduk();
-    public void hitungHargaProduk();
+    public int hitungJumlahProduk();
+    public double hitungHargaProduk();
 }
